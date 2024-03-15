@@ -14,18 +14,11 @@ import MongoConnect from "./connectToMongoDB.js"
 dotenv.config()
 const app = express()
 
-
-app.use("/api/auth",authRouts)
 app.use(express.json()); 
+app.use("/api/auth",authRouts)
 
 
 app.listen(process.env.PORT , ()=>{
     MongoConnect()
     console.log('Server is running on the port ${PORT}');
 })
-
-
-
-// app.get("/" ,(req , res)=>{
-//     res.send("Your server is working!!!")
-// })

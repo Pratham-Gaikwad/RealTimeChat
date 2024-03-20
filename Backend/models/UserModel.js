@@ -3,28 +3,28 @@ import mongoose, { Schema } from "mongoose";
 const userSchema = new mongoose.Schema({
     fullName : {
         type:String,
-        require:true,
+        required:true,
     },
     userName : {
         type:String,
-        require:true,
+        required:true,
         unique:true
     },
     password : {
         type:String,
-        require:true,
+        required:true,
         minlength:7
     },
     Usergender : {
         type:String,
-        require:true,
+        required:true,
         enum:["male","female"]
     },
     profilePicture : {
         type:String,
         default:""
     }
-})
+},{timeseries:true})
 
 const User = mongoose.model("User",userSchema)
 

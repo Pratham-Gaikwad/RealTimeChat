@@ -4,16 +4,16 @@ const messageSchema = new mongoose.Schema({
     senderID:{
         type: mongoose.Schema.Types.ObjectId,
         ref : "User",
-        required: True
+        required: true
     },
     reciverID:{
         type: mongoose.Schema.Types.ObjectId,
         ref : "User",
-        required: True
+        required: true
     },
     message:{
         type: String,
-        required : True
+        required : true
     }
 } , {timestamps:true})
 

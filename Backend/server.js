@@ -1,28 +1,29 @@
-// Packages Import
-import express from "express"
-import dotenv from "dotenv"
-import cookieParser from "cookie-parser"
+import path from "path";
+import express from "express";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
-// Routes Import
+import authRoutes from "./routes/auth.routes.js";
+import messageRoutes from "./routes/message.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
-import authRoutes from "./Routes/authRoutes.js"
-import messageRoutes from "./Routes/messageRoutes.js"
-
-
-// mongoDB connection Import
-import MongoConnect from "./connectToMongoDB.js"
+import connectToMongoDB from "./db/connectToMongoDB.js";
 
 
-dotenv.config()
+const PORT = process.env.PORT || 5000;
+
+
+dotenv.config();
 const app = express()
 
-app.use(express.json()); 
-app.use(cookieParser())
-app.use("/api/auth",authRoutes)
-app.use("/api/messages",messageRoutes)
+app.use(express.json()); // to parse the incoming requests with JSON payloads (from req.body)
+app.use(cookieParser());
 
+app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
+app.use("/api/users", userRoutes);
 
-app.listen(process.env.PORT , ()=>{
-    MongoConnect()
-    console.log('Server is running on the port ${PORT}');
-})
+app.listen(PORT, () => {
+	connectToMongoDB();
+	console.log(`Server Running on port ${PORT}`);
+});
